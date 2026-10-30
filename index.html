@@ -1,0 +1,1448 @@
+<title>PST Exam Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap">
+<style>
+/* Layout: sticky tab bar + scrollable chapter sections with visual diagrams */
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --surface2: #f0ede8;
+  --fg: #1d1d1f;
+  --fg2: #5a5a5e;
+  --primary: #1a535c;
+  --primary-light: #e0f0f2;
+  --accent: #d4880f;
+  --accent-light: #fef3e0;
+  --accent-bg: #f7b538;
+  --success: #2d6a4f;
+  --success-light: #d8f3dc;
+  --danger: #9b2226;
+  --danger-light: #fde8e8;
+  --border: #e0ddd8;
+  --shadow: rgba(0,0,0,0.06);
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111118;
+    --surface: #1c1c26;
+    --surface2: #252532;
+    --fg: #e8e8ec;
+    --fg2: #9a9aa8;
+    --primary: #4ecdc4;
+    --primary-light: #1a2e2c;
+    --accent: #f7b538;
+    --accent-light: #2e2510;
+    --accent-bg: #d4880f;
+    --success: #52b788;
+    --success-light: #1a2e22;
+    --danger: #e76f6f;
+    --danger-light: #2e1a1a;
+    --border: #2e2e3a;
+    --shadow: rgba(0,0,0,0.2);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111118;
+  --surface: #1c1c26;
+  --surface2: #252532;
+  --fg: #e8e8ec;
+  --fg2: #9a9aa8;
+  --primary: #4ecdc4;
+  --primary-light: #1a2e2c;
+  --accent: #f7b538;
+  --accent-light: #2e2510;
+  --accent-bg: #d4880f;
+  --success: #52b788;
+  --success-light: #1a2e22;
+  --danger: #e76f6f;
+  --danger-light: #2e1a1a;
+  --border: #2e2e3a;
+  --shadow: rgba(0,0,0,0.2);
+  color-scheme: dark;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0 0 auto;
+  height: env(safe-area-inset-top, 0px);
+  z-index: 100;
+  background: var(--bg);
+}
+* { box-sizing: border-box; margin: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); color: var(--fg); line-height: 1.2; text-wrap: balance; }
+h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); margin-bottom: 0.6em; }
+h3 { font-size: 1.15rem; margin-bottom: 0.4em; }
+
+.wrapper { max-width: 860px; margin: 0 auto; }
+
+/* Nav */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+nav::-webkit-scrollbar { display: none; }
+.tabs {
+  display: flex;
+  gap: 4px;
+  min-width: max-content;
+  padding: 0 4px;
+}
+.tab {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: none;
+  background: transparent;
+  color: var(--fg2);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.tab:hover { background: var(--surface2); color: var(--fg); }
+.tab.active { background: var(--primary); color: #fff; }
+
+/* Section */
+.section { display: none; padding: 24px 0 60px; }
+.section.active { display: block; }
+.section-intro {
+  font-size: 1.05rem;
+  color: var(--fg2);
+  margin-bottom: 28px;
+  max-width: 65ch;
+}
+
+/* Timeline */
+.timeline { position: relative; padding-left: 28px; margin: 24px 0; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 18px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -24px;
+  top: 18px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 2px solid var(--bg);
+}
+.tl-date {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.tl-title { font-family: var(--font-display); font-size: 1rem; margin: 2px 0 4px; }
+.tl-desc { font-size: 0.88rem; color: var(--fg2); }
+
+/* Cards */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+  margin: 20px 0;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+}
+.card-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.card h3 { font-size: 1.05rem; }
+.card p { font-size: 0.88rem; color: var(--fg2); margin-top: 6px; }
+
+/* Flow diagram */
+.flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 16px 0;
+}
+.flow-box {
+  background: var(--primary-light);
+  border: 1px solid var(--primary);
+  color: var(--fg);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  text-align: center;
+  min-width: 0;
+}
+.flow-arrow {
+  color: var(--primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Key fact box */
+.keyfact {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent-bg);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+.keyfact strong { color: var(--accent); }
+
+/* Important box */
+.important {
+  background: var(--success-light);
+  border-left: 3px solid var(--success);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+/* Warning/alert */
+.alert {
+  background: var(--danger-light);
+  border-left: 3px solid var(--danger);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+/* Term definition */
+.term-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 10px 0;
+}
+.term-word {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  color: var(--primary);
+}
+.term-def { font-size: 0.88rem; color: var(--fg2); margin-top: 4px; }
+.term-eg { font-size: 0.84rem; color: var(--fg); margin-top: 6px; font-style: italic; }
+
+/* Accordion for questions */
+details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 10px 0;
+}
+details + details { margin-top: 8px; }
+summary {
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.92rem;
+  list-style: none;
+}
+summary::before {
+  content: '▸ ';
+  color: var(--primary);
+  font-weight: 700;
+}
+details[open] summary::before { content: '▾ '; }
+summary::-webkit-details-marker { display: none; }
+.answer {
+  padding: 0 16px 14px;
+  font-size: 0.88rem;
+  color: var(--fg2);
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+.answer strong { color: var(--fg); }
+
+/* Table */
+.tbl-wrap { overflow-x: auto; margin: 16px 0; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+}
+th {
+  text-align: left;
+  padding: 8px 12px;
+  background: var(--surface2);
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fg2);
+  border-bottom: 2px solid var(--border);
+}
+td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+
+/* Comparison boxes */
+.compare {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 16px 0;
+}
+@media (max-width: 500px) { .compare { grid-template-columns: 1fr; } }
+.compare-col {
+  padding: 14px;
+  border-radius: var(--radius);
+}
+.compare-col.pro { background: var(--success-light); border: 1px solid var(--success); }
+.compare-col.con { background: var(--danger-light); border: 1px solid var(--danger); }
+.compare-col h4 { font-size: 0.9rem; margin-bottom: 8px; }
+.compare-col ul { padding-left: 18px; font-size: 0.86rem; }
+.compare-col li { margin-bottom: 4px; }
+
+/* Badge */
+.badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.badge-date { background: var(--accent-light); color: var(--accent); }
+.badge-person { background: var(--primary-light); color: var(--primary); }
+
+/* Sub-section spacer */
+.sub { margin-top: 32px; }
+
+/* Chain diagram (vertical) */
+.chain { display: flex; flex-direction: column; gap: 0; margin: 20px 0; max-width: 500px; }
+.chain-step {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.86rem;
+  position: relative;
+}
+.chain-step + .chain-step { margin-top: 24px; }
+.chain-step + .chain-step::before {
+  content: '↓';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--primary);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Progress tracker */
+.progress-bar {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+.progress-step {
+  flex: 1;
+  min-width: 80px;
+  text-align: center;
+  padding: 8px 6px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border-radius: 6px;
+  background: var(--surface2);
+  color: var(--fg2);
+}
+.progress-step.done { background: var(--primary); color: #fff; }
+
+/* Utility */
+.mt { margin-top: 20px; }
+.mb { margin-bottom: 20px; }
+.muted { color: var(--fg2); }
+.small { font-size: 0.84rem; }
+hr { border: none; border-top: 1px solid var(--border); margin: 28px 0; }
+ul, ol { padding-left: 20px; }
+li { margin-bottom: 4px; }
+</style>
+
+<div class="wrapper">
+<nav>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-target="overview">Overview</button>
+    <button class="tab" data-target="ch1">Ch 1: Muslim Rule</button>
+    <button class="tab" data-target="ch2">Ch 2: British & 1857</button>
+    <button class="tab" data-target="ch3">Ch 3: Aligarh & Congress</button>
+    <button class="tab" data-target="ch4">Ch 4: Political Voice</button>
+    <button class="tab" data-target="ch5">Ch 5: Constitution Fight</button>
+    <button class="tab" data-target="ch6">Ch 6: Road to Pakistan</button>
+    <button class="tab" data-target="terms">Key Terms</button>
+    <button class="tab" data-target="exam">Exam Prep</button>
+  </div>
+</nav>
+
+<!-- ==================== OVERVIEW ==================== -->
+<div class="section active" id="overview">
+  <h1>Pakistan Studies — Complete Exam Guide</h1>
+  <p class="section-intro">From the arrival of Islam in 712 to the Lahore Resolution in 1940. Everything you need, structured so each event connects to the next.</p>
+
+  <div class="keyfact">
+    <strong>The whole story in one line:</strong> Muslims ruled for centuries → lost power in 1857 → rebuilt through education (Aligarh) → asked British for safeguards (1906–1916) → saw those safeguards ignored (1928–1937) → demanded their own country (1940).
+  </div>
+
+  <h2>Master Timeline</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Year</th><th>Event</th><th>Key Person</th><th>Why It Matters</th></tr>
+      <tr><td><strong>712</strong></td><td>Sindh conquered</td><td>Muhammad bin Qasim</td><td>Islam enters the subcontinent</td></tr>
+      <tr><td><strong>1206</strong></td><td>Delhi Sultanate begins</td><td>Qutb-ud-Din Aibak</td><td>Muslim political power established</td></tr>
+      <tr><td><strong>1526</strong></td><td>Mughal Empire begins (1st Battle of Panipat)</td><td>Babur defeats Ibrahim Lodi</td><td>Longest Muslim dynasty — 331 years</td></tr>
+      <tr><td><strong>1707</strong></td><td>Aurangzeb dies</td><td>—</td><td>Mughal decline begins</td></tr>
+      <tr><td><strong>1757</strong></td><td>Battle of Plassey</td><td>EIC / Clive</td><td>British gain control of Bengal</td></tr>
+      <tr><td><strong>1857</strong></td><td>War of Independence</td><td>Meerut troopers</td><td>Mughal rule ends, Crown takes over</td></tr>
+      <tr><td><strong>1858</strong></td><td>Queen's Proclamation</td><td>Queen Victoria</td><td>Company → Crown rule</td></tr>
+      <tr><td><strong>1875</strong></td><td>MAO College Aligarh</td><td>Sir Syed Ahmad Khan</td><td>Muslim educational revival</td></tr>
+      <tr><td><strong>1885</strong></td><td>Congress founded</td><td>A.O. Hume</td><td>Hindu-dominated political body</td></tr>
+      <tr><td><strong>1905</strong></td><td>Partition of Bengal</td><td>Lord Curzon</td><td>Muslims gain, Hindus protest</td></tr>
+      <tr><td><strong>1906</strong></td><td>Simla Deputation (1 Oct)</td><td>Aga Khan III → Minto</td><td>Demand for separate electorates</td></tr>
+      <tr><td><strong>1906</strong></td><td>Muslim League founded (30 Dec)</td><td>Nawab Salim Ullah Khan, Dhaka</td><td>Muslims get their own party</td></tr>
+      <tr><td><strong>1909</strong></td><td>Minto-Morley Reforms</td><td>—</td><td>Separate electorates accepted</td></tr>
+      <tr><td><strong>1911</strong></td><td>Bengal partition cancelled</td><td>King George V</td><td>Muslim trust in British shaken</td></tr>
+      <tr><td><strong>1916</strong></td><td>Lucknow Pact</td><td>Jinnah</td><td>Congress accepts separate electorates</td></tr>
+      <tr><td><strong>1927</strong></td><td>Simon Commission</td><td>—</td><td>All-British, no Indian member → boycott</td></tr>
+      <tr><td><strong>1928</strong></td><td>Nehru Report</td><td>Motilal Nehru</td><td>Scraps separate electorates, offers only 1/4</td></tr>
+      <tr><td><strong>1929</strong></td><td>Jinnah's 14 Points (28 Mar)</td><td>Jinnah</td><td>Muslim constitutional demands</td></tr>
+      <tr><td><strong>1930</strong></td><td>Allahabad Address</td><td>Allama Iqbal</td><td>First formal idea of a separate Muslim state</td></tr>
+      <tr><td><strong>1930–32</strong></td><td>Round Table Conferences</td><td>—</td><td>No agreement reached</td></tr>
+      <tr><td><strong>1935</strong></td><td>Government of India Act</td><td>—</td><td>11 provinces, provincial autonomy</td></tr>
+      <tr><td><strong>1937</strong></td><td>Provincial elections</td><td>Congress 707, League 107</td><td>Congress wins, rules 8 provinces</td></tr>
+      <tr><td><strong>1939</strong></td><td>Day of Deliverance (22 Dec)</td><td>League</td><td>Relief from Congress rule</td></tr>
+      <tr><td><strong>1940</strong></td><td>Lahore Resolution (23 Mar)</td><td>Fazl-ul-Haq moves it</td><td>Formal demand for Pakistan</td></tr>
+    </table>
+  </div>
+
+  <h2 class="sub">The 5 Cause-and-Effect Chains</h2>
+  <p class="muted small mb">These chains are the backbone of critical answers. Every exam question boils down to one of these.</p>
+
+  <h3>Chain A — Why Muslims Fell Behind</h3>
+  <div class="chain">
+    <div class="chain-step">Mughals built monuments but <strong>no modern educational institutions</strong></div>
+    <div class="chain-step">Weak successors, luxury, no navy → empire crumbles after Aurangzeb (1707)</div>
+    <div class="chain-step">EIC exploits the vacuum → <strong>1857 War fails</strong> → British blame Muslims specifically</div>
+    <div class="chain-step">Sir Syed pushes Western education + British cooperation → <strong>Aligarh Movement</strong></div>
+  </div>
+
+  <h3>Chain B — Why Muslims Needed Their Own Party</h3>
+  <div class="chain">
+    <div class="chain-step">Congress founded 1885 — only 2 of 70 delegates were Muslim</div>
+    <div class="chain-step">Sir Syed warned: Congress will become a <strong>Hindu body</strong></div>
+    <div class="chain-step">1905 Bengal Partition: Muslims gain, Congress leads Swadeshi against it</div>
+    <div class="chain-step">Muslims realise they need <strong>their own political voice</strong></div>
+    <div class="chain-step"><strong>Simla Deputation</strong> (1 Oct 1906) + <strong>Muslim League</strong> (30 Dec 1906)</div>
+  </div>
+
+  <h3>Chain C — The Separate Electorate Story</h3>
+  <div class="flow">
+    <div class="flow-box">1906: Muslims demand it</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1909: British accept it</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1916: Congress accepts it (Lucknow)</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1928: Nehru Report scraps it</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1929: Jinnah demands it back (14 Points)</div>
+  </div>
+
+  <h3>Chain D — Why League Lost 1937 but Won by 1946</h3>
+  <div class="chain">
+    <div class="chain-step"><strong>1937 loss:</strong> Jinnah was in exile, weak League organisation, low Muslim awareness</div>
+    <div class="chain-step">Congress rule (8 provinces): Bande Matram, Hindi replacing Urdu, Wardha Scheme</div>
+    <div class="chain-step">League reorganises: mass contact, local branches, Pirpur/Shareef Reports</div>
+    <div class="chain-step"><strong>Day of Deliverance</strong> (22 Dec 1939) → <strong>Lahore Resolution</strong> (23 Mar 1940)</div>
+    <div class="chain-step">1945-46 elections: Muslims vote clearly for Pakistan</div>
+  </div>
+
+  <h3>Chain E — The Demand Ladder</h3>
+  <div class="flow">
+    <div class="flow-box">1906: Safeguards inside India</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1916: Shared self-rule with Congress</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1929: Federation with provincial autonomy</div>
+    <span class="flow-arrow">→</span>
+    <div class="flow-box">1940: Sovereign Muslim states</div>
+  </div>
+  <div class="important">
+    <strong>Exam tip:</strong> Every Muslim demand escalated because the previous one was ignored or reversed. This is the single most important thread for critical questions.
+  </div>
+</div>
+
+<!-- ==================== CH 1: MUSLIM RULE ==================== -->
+<div class="section" id="ch1">
+  <h1>Ch 1 — Advent of Islam (712–1857)</h1>
+  <p class="section-intro">1,100+ years of Muslim presence in the subcontinent: from Muhammad bin Qasim's arrival to the fall of the Mughals.</p>
+
+  <h2>Muhammad bin Qasim (712)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Background</div>
+      <p>Raja Dahir of Sindh refused to act against pirates who looted Muslim ships. He also persecuted Muslims in Sindh and refused to return them.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">What happened</div>
+      <p>Hajjaj bin Yusuf (governor of Iraq) sent <strong>17-year-old Muhammad bin Qasim</strong> with 6,000 troops. Conquered Sindh (712) and Multan (714).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Impact</div>
+      <p>First Muslim territory in the subcontinent. Introduced Islamic governance, religious tolerance. Local population saw an alternative to caste system.</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Delhi Sultanate (1206–1526)</h2>
+  <p>Five dynasties ruled from Delhi for 320 years. Each rose and fell, but kept Muslim political power alive.</p>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Dynasty</th><th>Years</th><th>Founder</th><th>Remember This</th></tr>
+      <tr><td>Slave (Mamluk)</td><td>1206–1290</td><td>Qutb-ud-Din Aibak</td><td>First dynasty. Aibak was a slave who became king. Built Qutb Minar.</td></tr>
+      <tr><td>Khilji</td><td>1290–1320</td><td>Jalal-ud-Din Firuz</td><td>Ala-ud-Din Khilji expanded to South India, market price controls.</td></tr>
+      <tr><td>Tughlaq</td><td>1320–1414</td><td>Ghiyas-ud-Din Tughlaq</td><td>Muhammad Tughlaq's disastrous capital shift, token currency experiment.</td></tr>
+      <tr><td>Sayyid</td><td>1414–1451</td><td>Khizr Khan</td><td>Weak dynasty, claimed descent from Prophet Muhammad (SAW).</td></tr>
+      <tr><td>Lodhi</td><td>1451–1526</td><td>Bahlol Khan Lodhi</td><td>Last Sultanate dynasty. Ibrahim Lodi lost to Babur at Panipat.</td></tr>
+    </table>
+  </div>
+  <div class="keyfact"><strong>Memory trick:</strong> S-K-T-S-L (Slave, Khilji, Tughlaq, Sayyid, Lodhi) — "Some Kings Take Sweet Lassi"</div>
+
+  <h2 class="sub">Mughal Empire (1526–1857)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Ruler</th><th>Years</th><th>Key Fact</th></tr>
+      <tr><td><strong>Babur</strong></td><td>1526–1530</td><td>Founded Mughals. Beat Ibrahim Lodi at 1st Battle of Panipat (1526).</td></tr>
+      <tr><td>Humayun</td><td>1530–1556</td><td>Lost throne to Sher Shah Suri, regained it.</td></tr>
+      <tr><td><strong>Akbar</strong></td><td>1556–1605</td><td>Expanded empire massively. Religious tolerance (Din-i-Ilahi). Controversial among Muslims.</td></tr>
+      <tr><td>Jahangir</td><td>1605–1627</td><td>Known for justice. Chain of Justice concept.</td></tr>
+      <tr><td>Shah Jahan</td><td>1627–1658</td><td>Built Taj Mahal. Golden age of architecture.</td></tr>
+      <tr><td><strong>Aurangzeb</strong></td><td>1658–1707</td><td>Last great Mughal. Strictly Islamic. After him = decline.</td></tr>
+    </table>
+  </div>
+
+  <h3 class="sub">Why Did the Mughals Decline?</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Internal</div>
+      <p>Weak successors after Aurangzeb. Luxury and extravagance instead of governance. Wars of succession between princes.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Structural</div>
+      <p><strong>No modern educational institutions.</strong> No navy — couldn't compete with European sea powers. No industrial development.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">External</div>
+      <p>Maratha, Sikh and regional rebellions. European trading companies gaining territory. EIC exploited every weakness.</p>
+    </div>
+  </div>
+  <div class="alert"><strong>Exam favourite:</strong> "Why did the Mughals decline?" — always mention the education gap. It connects directly to why Sir Syed later pushed Western education (Chain A).</div>
+
+  <details>
+    <summary>Critical Q: Was the Delhi Sultanate good or bad for the subcontinent?</summary>
+    <div class="answer">
+      <strong>Model answer structure:</strong> Start with "The Delhi Sultanate had both positive contributions and negative aspects." Then give:<br><br>
+      <strong>Positive:</strong> Introduced new architecture (Qutb Minar), trade routes, administrative systems, Persian literature and language, religious scholars.<br>
+      <strong>Negative:</strong> Some rulers were harsh (Ala-ud-Din's market controls), forced conversions by some (not all), instability from constant dynasty changes.<br>
+      <strong>Conclusion:</strong> It established Muslim political identity in India for 320 years and laid the foundation for Mughal rule.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== CH 2: BRITISH & 1857 ==================== -->
+<div class="section" id="ch2">
+  <h1>Ch 2 — East India Company & War of 1857</h1>
+  <p class="section-intro">How a trading company became a ruling power, and how the first organised resistance failed — ending Muslim rule forever.</p>
+
+  <h2>How the EIC Took Over</h2>
+  <div class="chain">
+    <div class="chain-step">British came to <strong>trade</strong> (16th century), formed East India Company</div>
+    <div class="chain-step">Won key battles: <strong>Plassey (1757), Buxar (1764), Mysore wars</strong> — gained territory after each</div>
+    <div class="chain-step"><strong>Doctrine of Lapse:</strong> If a ruler died without a natural male heir, EIC annexed his state</div>
+    <div class="chain-step">By 1857, EIC controlled most of the subcontinent through <strong>treaties, wars, and annexation</strong></div>
+  </div>
+
+  <h2 class="sub">Causes of the 1857 War</h2>
+  <p class="muted small">Your teacher can ask "causes" as a 10-mark question. Cover all 5 categories.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Political</div>
+      <p>Doctrine of Lapse, annexation of states, no Indian participation in governance, removal of Mughal emperor's title.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Military</div>
+      <p>Indian soldiers (sepoys) paid less than British. <strong>Greased cartridges</strong> (cow and pig fat) — offensive to both Hindus and Muslims. Forced to serve overseas (crossing the sea was taboo).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Economic</div>
+      <p>Heavy taxes on farmers. Indian raw materials exported cheaply, finished British goods imported. <strong>Drain of wealth</strong> from India to Britain.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Social & Religious</div>
+      <p>Christian missionaries encouraged conversion. Interference in Hindu and Muslim customs. Sati abolition (seen as interference).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Educational</div>
+      <p>English replaced Persian as official language (1835). Western education imposed. Traditional Muslim scholars lost their status.</p>
+    </div>
+  </div>
+
+  <h2 class="sub">The War: What Happened</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">9 May 1857</div>
+      <div class="tl-title">Meerut: 85 Indian troopers court-martialed</div>
+      <div class="tl-desc">They refused to use the greased cartridges. Sentenced to 10 years in prison. Fellow soldiers revolted.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">10 May 1857</div>
+      <div class="tl-title">Revolt reaches Delhi</div>
+      <div class="tl-desc">Rebels marched to Delhi, declared Bahadur Shah Zafar as Emperor of India.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">May–Jul 1857</div>
+      <div class="tl-title">Spread to Lucknow, Kanpur, Jhansi</div>
+      <div class="tl-desc">Multiple centres of rebellion but no coordination between them.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">July 1858</div>
+      <div class="tl-title">War crushed</div>
+      <div class="tl-desc">British reinforcements from Punjab and other areas. Brutal reprisals.</div>
+    </div>
+  </div>
+
+  <h2 class="sub">Why Did It Fail?</h2>
+  <div class="card-grid">
+    <div class="card"><div class="card-label">No unity</div><p>No central leadership or coordination. Each city fought alone.</p></div>
+    <div class="card"><div class="card-label">Limited area</div><p>Rebellion was mainly in North India. South, Punjab, and Sindh stayed quiet.</p></div>
+    <div class="card"><div class="card-label">Betrayals</div><p>Sikhs, Gurkhas, and some Indian princes fought FOR the British.</p></div>
+    <div class="card"><div class="card-label">Better weapons</div><p>British had modern rifles, cannons, telegraph, railways. Rebels had outdated equipment.</p></div>
+  </div>
+
+  <h2 class="sub">Impact</h2>
+  <div class="important">
+    <strong>Queen's Proclamation (1858):</strong><br>
+    • EIC dissolved → <strong>British Crown</strong> now rules India directly<br>
+    • Bahadur Shah Zafar exiled to Rangoon → <strong>Mughal dynasty ends forever</strong><br>
+    • British adopted <strong>Divide and Rule</strong> policy — set Hindus against Muslims<br>
+    • Muslims were specifically punished because British saw them as the main threat
+  </div>
+  <div class="keyfact"><strong>This is the turning point.</strong> Everything that follows — Sir Syed, the League, Pakistan — is a response to this defeat. Muslims went from rulers to the most disadvantaged community.</div>
+
+  <details>
+    <summary>Critical Q: Was the 1857 War really a "War of Independence" or just a military mutiny?</summary>
+    <div class="answer">
+      <strong>Argue both sides:</strong><br>
+      <strong>War of Independence:</strong> It involved civilians, not just soldiers. People wanted to restore Indian rule. Bahadur Shah was declared emperor — a political act. Multiple cities joined.<br>
+      <strong>Mutiny argument:</strong> Started as a military issue (cartridges). No national agenda or manifesto. Limited to North India. Many Indians fought against the rebels.<br>
+      <strong>Best conclusion:</strong> It started as a mutiny but grew into a broader uprising. While it lacked the organisation of a true independence movement, calling it "just a mutiny" ignores the political and social grievances behind it.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== CH 3: ALIGARH & CONGRESS ==================== -->
+<div class="section" id="ch3">
+  <h1>Ch 3 — Aligarh Movement & Congress</h1>
+  <p class="section-intro">After 1857, Muslims were crushed. One man — Sir Syed Ahmad Khan — decided the way forward was education, not rebellion.</p>
+
+  <h2>Sir Syed Ahmad Khan</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Born</div>
+      <h3>17 October 1817, Delhi</h3>
+      <p>Noble Mughal family. Served as a judicial officer under the EIC. Stayed loyal during 1857 and saved British lives.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Died</div>
+      <h3>27 March 1898, Aligarh</h3>
+      <p>Left behind a movement that transformed Muslim education and politics in the subcontinent.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">His Key Works (Timeline)</h3>
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-date">1858</div>
+      <div class="tl-title">"Risalah Asbab-e-Baghawat-e-Hind"</div>
+      <div class="tl-desc">Essay on the causes of the Indian revolt. Argued British policies caused it, not Muslim disloyalty. Convinced British to reconsider their anti-Muslim stance.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1860</div>
+      <div class="tl-title">"Loyal Mohammadans of India"</div>
+      <div class="tl-desc">Published to show British that Muslims had been loyal. Aimed to rebuild trust.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1863</div>
+      <div class="tl-title">Scientific Society, Ghazipur</div>
+      <div class="tl-desc">Translated English books into Urdu and Hindi. First attempt to bring modern knowledge to Indians.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1869–70</div>
+      <div class="tl-title">Visit to England</div>
+      <div class="tl-desc">Saw Oxford and Cambridge. Decided to build a similar institution for Muslims. This trip changed everything.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1870</div>
+      <div class="tl-title">"Tahzib-ul-Ikhlaq" (Social Reformer journal)</div>
+      <div class="tl-desc">Urged Muslims to abandon outdated customs, embrace modern science while keeping faith. Controversial but influential.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1875</div>
+      <div class="tl-title">MAO College, Aligarh</div>
+      <div class="tl-desc">Mohammadan Anglo-Oriental College. Western-style education with Islamic values. Became AMU (Aligarh Muslim University) in 1920.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1883</div>
+      <div class="tl-title">Mohammadan Association</div>
+      <div class="tl-desc">Political organisation to represent Muslim interests to the British government.</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">1886</div>
+      <div class="tl-title">Mohammadan Educational Conference</div>
+      <div class="tl-desc">Annual conference to promote Muslim education across India. Became the platform from which the Muslim League was later born.</div>
+    </div>
+  </div>
+
+  <h3 class="sub">Sir Syed's Big Ideas</h3>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Idea 1</div>
+      <h3>Western education is survival</h3>
+      <p>Muslims fell behind because they rejected English education. To compete, they must learn modern science, English, and Western systems — while keeping their Islamic identity.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Idea 2</div>
+      <h3>Cooperate with British</h3>
+      <p>Confrontation failed (1857). The practical path is loyalty and cooperation, which earns trust and opportunities.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Idea 3</div>
+      <h3>Two-Nation Theory (seed)</h3>
+      <p>Hindus and Muslims are <strong>two separate nations</strong> with different religions, customs, histories and heroes. They cannot be merged into one nation.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Idea 4</div>
+      <h3>Stay away from Congress</h3>
+      <p>Congress is dominated by Hindus. In a democratic setup (majority wins), Muslims will always lose. Political involvement before education = disaster.</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Indian National Congress (1885)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Founded</div>
+      <h3>December 1885, Bombay</h3>
+      <p><strong>A.O. Hume</strong> (retired British civil servant) founded it. 70 delegates at first meeting. Only <strong>2 were Muslim</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">First President</div>
+      <h3>W.C. Banerjee</h3>
+      <p>Bengali Hindu lawyer. Congress claimed to represent all Indians but its leadership and agenda were overwhelmingly Hindu.</p>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-col pro">
+      <h4>Congress's Claim</h4>
+      <ul>
+        <li>We represent all Indians</li>
+        <li>Democracy = one person one vote</li>
+        <li>United India is stronger</li>
+      </ul>
+    </div>
+    <div class="compare-col con">
+      <h4>Muslim Concern</h4>
+      <ul>
+        <li>Only 2 of 70 delegates were Muslim</li>
+        <li>One person one vote = permanent Hindu majority</li>
+        <li>"United" India ignores Muslim interests</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="keyfact"><strong>Connection to Chain B:</strong> Sir Syed predicted Congress would become a Hindu party. This prediction came true, which is why Muslims formed their own party (the League) in 1906.</div>
+
+  <details>
+    <summary>Critical Q: Was Sir Syed right to tell Muslims to stay away from politics?</summary>
+    <div class="answer">
+      <strong>Arguments for:</strong> Muslims were uneducated and poor after 1857. Joining politics without education = being outvoted by the Hindu majority. Education first, politics later was a survival strategy.<br><br>
+      <strong>Arguments against:</strong> By staying out of Congress, Muslims lost their voice in early Indian politics. Congress got a head start in organisation and influence. Some argue Muslims should have participated AND educated.<br><br>
+      <strong>Best conclusion:</strong> Given the situation in the 1880s — Muslims were 25% of population, far behind in education, and Congress had 68 Hindu delegates out of 70 — Sir Syed's strategy was realistic. The League was founded just 8 years after his death, proving Muslims did enter politics once they had the educational foundation.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== CH 4: POLITICAL VOICE ==================== -->
+<div class="section" id="ch4">
+  <h1>Ch 4 — Muslims Find Their Political Voice (1900–1920)</h1>
+  <p class="section-intro">Four game-changing events in 15 years: Bengal's partition woke Muslims up, and by 1916 they had their own party and their first deal with Congress.</p>
+
+  <h2>Partition of Bengal (1905)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Before</div>
+      <h3>Bengal was too big</h3>
+      <p>Largest province: <strong>78.5 million people</strong>. Impossible to govern. East Bengal (Muslim majority) was neglected — no schools, no industry, no infrastructure.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">The Split</div>
+      <h3>16 October 1905 by Lord Curzon</h3>
+      <p><strong>East Bengal + Assam:</strong> 31 million (18M Muslim, 12M Hindu). Capital: Dhaka.<br>
+      <strong>West Bengal:</strong> 54 million (42M Hindu). Capital: Calcutta.</p>
+    </div>
+  </div>
+
+  <div class="compare">
+    <div class="compare-col pro">
+      <h4>Why Muslims Supported It</h4>
+      <ul>
+        <li>East Bengal finally gets its own government</li>
+        <li>Muslims become majority in their province</li>
+        <li>More schools, jobs, opportunities for Muslims</li>
+        <li>Dhaka becomes a capital city</li>
+      </ul>
+    </div>
+    <div class="compare-col con">
+      <h4>Why Hindus Opposed It</h4>
+      <ul>
+        <li>Bengalis divided — seen as "Divide and Rule"</li>
+        <li>Hindu landlords lost control over East Bengal</li>
+        <li>Congress launched <strong>Swadeshi Movement</strong> (boycott British goods)</li>
+        <li>Violent protests and agitation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert"><strong>12 December 1911:</strong> King George V <strong>annulled the partition</strong> at the Delhi Darbar. Bengal was reunited. Muslims felt <strong>deeply betrayed</strong> — they saw that Hindu protests could override British policy. This shook Muslim trust in the British.</div>
+
+  <h2 class="sub">Simla Deputation (1 October 1906)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">What</div>
+      <p><strong>35 Muslim leaders</strong> led by <strong>Aga Khan III</strong> met Viceroy <strong>Lord Minto</strong> at Simla.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Demands</div>
+      <p>1. <strong>Separate electorates</strong> (Muslims vote for Muslim candidates only)<br>
+      2. Representation more than population share (<strong>weightage</strong>)<br>
+      3. A Muslim university</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Result</div>
+      <p>Lord Minto was <strong>sympathetic</strong>. These demands became the basis of the <strong>Minto-Morley Reforms (1909)</strong>.</p>
+    </div>
+  </div>
+  <div class="keyfact"><strong>Why it matters:</strong> First time Muslims formally demanded separate political representation. Without this, there would have been no separate electorates, no Muslim League, no Pakistan movement.</div>
+
+  <h2 class="sub">Muslim League Founded (30 December 1906)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Where</div>
+      <h3>Dhaka, East Bengal</h3>
+      <p>Hosted by <strong>Nawab Salim Ullah Khan</strong> of Dhaka. Meeting was at the Ahsan Manzil.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">First President</div>
+      <h3>Nawab Viqar-ul-Mulk</h3>
+    </div>
+    <div class="card">
+      <div class="card-label">Goals</div>
+      <p>1. Protect Muslim political rights<br>
+      2. Promote loyalty to British government<br>
+      3. Prevent hostility between Muslims and other communities</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Minto-Morley Reforms (1909)</h2>
+  <div class="important">
+    <strong>Indian Councils Act 1909</strong><br>
+    • <strong>Accepted separate electorates</strong> for Muslims — the biggest win<br>
+    • Expanded legislative councils (more Indian members)<br>
+    • But elected members had limited power — could discuss but not decide
+  </div>
+
+  <h2 class="sub">Lucknow Pact (December 1916)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">What</div>
+      <p>Congress and Muslim League <strong>agreed to work together</strong> for self-governance. Congress <strong>accepted separate electorates</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Terms for Muslims</div>
+      <p>• Separate electorates confirmed<br>
+      • <strong>1/3 Muslim seats</strong> in central legislature<br>
+      • Muslim majorities preserved in Punjab and Bengal</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Key Figure</div>
+      <h3>Muhammad Ali Jinnah</h3>
+      <p>Brokered the deal. Called the <strong>"Ambassador of Hindu-Muslim Unity"</strong> at this point. That title didn't last.</p>
+    </div>
+  </div>
+  <div class="keyfact"><strong>Chain C link:</strong> At Lucknow, Congress accepted separate electorates and 1/3 representation. 12 years later, the Nehru Report (1928) scrapped both. This is why Jinnah lost faith in Congress.</div>
+
+  <details>
+    <summary>Critical Q: Was the Partition of Bengal a genuine administrative reform or just Divide and Rule?</summary>
+    <div class="answer">
+      <strong>Administrative argument:</strong> Bengal had 78.5 million people, the largest province by far. East Bengal was genuinely neglected. The partition gave it its own administration, which was good governance.<br><br>
+      <strong>Divide and Rule argument:</strong> The partition conveniently split Hindu and Muslim populations. Lord Curzon may have wanted to weaken Bengali nationalism. When Hindus protested enough, the British reversed it in 1911 — showing it wasn't really about administration.<br><br>
+      <strong>Best answer:</strong> Both can be true. The administrative need was real, but the British weren't unhappy that it also divided a politically active community. The reversal in 1911 proved that "administrative" reasons could be overruled by political pressure — which is exactly what happened.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== CH 5: CONSTITUTIONAL STRUGGLE ==================== -->
+<div class="section" id="ch5">
+  <h1>Ch 5 — The Constitutional Struggle (1921–1935)</h1>
+  <p class="section-intro">Muslims tried to negotiate within the system. Every time they thought they had a deal, the goalposts moved. This chapter is where hope turned into frustration.</p>
+
+  <h2>Simon Commission (1927)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">What</div>
+      <p>A British commission to review India's constitutional progress. Led by <strong>Sir John Simon</strong>. <strong>All 7 members were British</strong> — no Indian.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Reaction</div>
+      <p>Both Congress and Jinnah's group <strong>boycotted it</strong>. "Go Back Simon" protests across India. Showed Indians wanted to write their own constitution.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Consequence</div>
+      <p>Since Indians rejected Simon, Congress decided to write its own constitutional proposal → <strong>Nehru Report</strong>.</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Nehru Report (1928)</h2>
+  <div class="alert">
+    <strong>This is the document that broke Hindu-Muslim cooperation.</strong> After Lucknow (1916) where Congress accepted Muslim demands, the Nehru Report took them all back.
+  </div>
+  <div class="compare">
+    <div class="compare-col pro">
+      <h4>What Lucknow (1916) Gave Muslims</h4>
+      <ul>
+        <li>Separate electorates ✓</li>
+        <li>1/3 Muslim seats in centre ✓</li>
+        <li>Muslim majority preserved in Punjab/Bengal ✓</li>
+      </ul>
+    </div>
+    <div class="compare-col con">
+      <h4>What Nehru Report (1928) Offered</h4>
+      <ul>
+        <li>Joint electorates (separate electorates scrapped) ✗</li>
+        <li>Only 1/4 Muslim seats (not 1/3) ✗</li>
+        <li>Unitary government (no provincial autonomy) ✗</li>
+      </ul>
+    </div>
+  </div>
+  <div class="keyfact"><strong>Why it matters:</strong> The Nehru Report is the single biggest reason Jinnah moved from "united India" to "Muslims need their own safeguards." It proved Congress's promises at Lucknow were not permanent.</div>
+
+  <h2 class="sub">Jinnah's Fourteen Points (28 March 1929)</h2>
+  <p>Jinnah's direct response to the Nehru Report. These 14 demands became the official Muslim position.</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>#</th><th>Demand</th><th>Why It Mattered</th></tr>
+      <tr><td>1</td><td>Federal constitution, residuary powers to provinces</td><td>Provinces run their own affairs (opposite of Nehru's unitary plan)</td></tr>
+      <tr><td>2</td><td>Provincial autonomy</td><td>Muslim-majority provinces control their own laws</td></tr>
+      <tr><td>3</td><td>Adequate Muslim representation in all bodies</td><td>Protection from being outvoted</td></tr>
+      <tr><td>4</td><td>1/3 Muslim representation in central legislature</td><td>Nehru offered only 1/4</td></tr>
+      <tr><td>5</td><td>Separate electorates</td><td>Nehru scrapped them — Jinnah brought them back</td></tr>
+      <tr><td>6</td><td>No reduction in Muslim majority in Punjab, Bengal, NWFP</td><td>Don't redraw boundaries to create Hindu majorities</td></tr>
+      <tr><td>7</td><td>Full religious liberty</td><td>Freedom to practise and propagate</td></tr>
+      <tr><td>8</td><td>1/3 Muslim ministers in cabinets</td><td>Executive power, not just seats</td></tr>
+      <tr><td>9</td><td><strong>Separate Sindh from Bombay</strong></td><td>Create another Muslim-majority province</td></tr>
+      <tr><td>10</td><td><strong>Reforms in NWFP and Balochistan</strong></td><td>Give them full provincial status</td></tr>
+      <tr><td>11–14</td><td>Protection of Muslim culture, language, education, religious institutions</td><td>Safeguard Muslim identity</td></tr>
+    </table>
+  </div>
+  <div class="important"><strong>Points 9 and 10 actually came true</strong> in the Government of India Act 1935. Sindh was separated from Bombay and NWFP got full provincial status. Use this in answers to show the 14 Points had lasting impact.</div>
+
+  <h2 class="sub">Allahabad Address (1930)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Who</div>
+      <h3>Allama Muhammad Iqbal</h3>
+      <p>Poet, philosopher, and political thinker. President of Muslim League session at Allahabad.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">What He Said</div>
+      <p>"I would like to see the Punjab, NWFP, Sindh, and Balochistan amalgamated into a <strong>single state</strong>." This was the <strong>first formal articulation</strong> of a separate Muslim homeland in northwestern India.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Impact</div>
+      <p>Gave the Pakistan idea an <strong>intellectual and philosophical foundation</strong>. Before this, Muslims wanted safeguards. After this, some started thinking about a separate state.</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Round Table Conferences (1930–1932)</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Conference</th><th>When</th><th>What Happened</th></tr>
+      <tr><td><strong>1st RTC</strong></td><td>Nov 1930 – Jan 1931</td><td>Congress <strong>boycotted it</strong> (Civil Disobedience Movement). Other parties attended but no agreement.</td></tr>
+      <tr><td><strong>Gandhi-Irwin Pact</strong></td><td>5 March 1931</td><td>Congress agreed to stop civil disobedience. Gandhi agreed to attend 2nd RTC.</td></tr>
+      <tr><td><strong>2nd RTC</strong></td><td>Sep – Dec 1931</td><td>Gandhi attended but <strong>claimed to represent all Indians</strong>, including Muslims. Muslim leaders disagreed. No result.</td></tr>
+      <tr><td><strong>3rd RTC</strong></td><td>Nov 1932</td><td>Even less attendance. No meaningful result. RTCs were a failure overall.</td></tr>
+    </table>
+  </div>
+
+  <h2 class="sub">Government of India Act (1935)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Structure</div>
+      <p><strong>11 provinces</strong> with provincial autonomy. Federal structure (centre + provinces). Bicameral (two-house) legislature at centre.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Muslim Wins</div>
+      <p>• Separate electorates <strong>continued</strong><br>
+      • <strong>Sindh separated from Bombay</strong> (Jinnah's Point 9)<br>
+      • <strong>NWFP got full status</strong> (Jinnah's Point 10)<br>
+      • Diarchy abolished in provinces</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Limitations</div>
+      <p>• Diarchy <strong>kept at the centre</strong><br>
+      • Governor-General retained veto power<br>
+      • Federal part never implemented<br>
+      • Elections held under this act (1937)</p>
+    </div>
+  </div>
+
+  <details>
+    <summary>Critical Q: Were Jinnah's 14 Points reasonable or too demanding?</summary>
+    <div class="answer">
+      <strong>Reasonable argument:</strong> They were a direct response to the Nehru Report, which had scrapped promises made at Lucknow. Points 1-8 were about fair representation — basic democratic safeguards for a 25% minority. Points 9 and 10 actually became law in 1935.<br><br>
+      <strong>"Too demanding" argument:</strong> Separate electorates divide the electorate permanently. 1/3 seats for 25% population is over-representation. Provincial autonomy weakens central government.<br><br>
+      <strong>Best answer:</strong> The Points were proportionate to what Muslims stood to lose. The Nehru Report had reduced Muslim safeguards, so the 14 Points were a counter-offer, not an opening demand. The fact that 2 of the 14 became law within 6 years suggests they were practical, not extreme.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== CH 6: ROAD TO PAKISTAN ==================== -->
+<div class="section" id="ch6">
+  <h1>Ch 6 — The Road to Pakistan (1936–1940)</h1>
+  <p class="section-intro">Muslims experienced Congress rule firsthand and decided: never again. In just 4 years, the demand went from "give us more seats" to "give us our own country."</p>
+
+  <h2>Provincial Elections of 1937</h2>
+  <div class="tbl-wrap">
+    <table>
+      <tr><th>Party</th><th>Seats Won</th><th>Out of</th></tr>
+      <tr><td><strong>Congress</strong></td><td><strong>707</strong></td><td rowspan="3">1,585 total</td></tr>
+      <tr><td>Muslim League</td><td>107</td></tr>
+      <tr><td>Unionist Party (Punjab)</td><td>101</td></tr>
+    </table>
+  </div>
+
+  <div class="compare">
+    <div class="compare-col pro">
+      <h4>Why Congress Won Big</h4>
+      <ul>
+        <li>Better organised (existed since 1885)</li>
+        <li>Gandhi's mass movement had built grassroots support</li>
+        <li>Hindu majority = more general seats</li>
+      </ul>
+    </div>
+    <div class="compare-col con">
+      <h4>Why League Did Poorly</h4>
+      <ul>
+        <li>Jinnah was in voluntary exile (London, 1931–34)</li>
+        <li>League had no local branches or mass support</li>
+        <li>Muslim voters lacked political awareness</li>
+        <li>Competed with regional Muslim parties (Unionists)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="keyfact"><strong>Key context:</strong> Congress formed government in <strong>8 out of 11 provinces</strong>. It even rejected League's offer of coalition in UP (United Provinces). This rejection humiliated the League and radicalised Muslim politics.</div>
+
+  <h2 class="sub">Congress Rule (1937–1939): What Muslims Experienced</h2>
+  <p>This is the most critical section for exam answers about <em>why</em> Pakistan was demanded.</p>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Bande Matram</div>
+      <p>Made into the national anthem. It's a <strong>Hindu religious song</strong> from a novel (<em>Anandamath</em>) that describes fighting Muslims. Muslims were forced to sing it in schools.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Hindi over Urdu</div>
+      <p>Congress governments pushed <strong>Hindi in Devanagari script</strong> to replace Urdu. This threatened Muslim cultural identity — Urdu was their language of education and literature.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Wardha Scheme</div>
+      <p>Gandhi's education plan. Focused on <strong>Hindu culture and values</strong>. Spinning wheel (charkha) as central activity. No space for Islamic education. Made compulsory in Congress provinces.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Congress Flag</div>
+      <p>Congress tri-colour flag hoisted on <strong>government buildings</strong>, replacing the Union Jack. Muslims saw this as Congress treating itself as the ruling party of a Hindu state, not a national government.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Cow Protection</div>
+      <p>Laws to ban cow slaughter. Affected Muslims' religious practices (Eid-ul-Adha sacrifices) and livelihoods (butchers, leather workers).</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Documentation</div>
+      <p><strong>Pirpur Report</strong> and <strong>Shareef Report</strong> documented atrocities and discrimination against Muslims during Congress rule. Used as evidence by the League.</p>
+    </div>
+  </div>
+
+  <div class="alert"><strong>This is the exam goldmine.</strong> When asked "Why did Muslims demand Pakistan?", Congress rule (1937-39) is the strongest evidence. It proved that in a united India with majority rule, Muslim culture, language, and religion would be suppressed.</div>
+
+  <h2 class="sub">League's Comeback</h2>
+  <div class="chain">
+    <div class="chain-step">Jinnah returned from London (1934) and took charge of the League</div>
+    <div class="chain-step">After 1937 loss: <strong>mass contact campaign</strong>, local branches in every district</div>
+    <div class="chain-step">Congress rule gave the League its best argument: <strong>"see what happens when Hindus rule"</strong></div>
+    <div class="chain-step">Muslim political awareness exploded. League membership grew massively.</div>
+  </div>
+
+  <h2 class="sub">Day of Deliverance (22 December 1939)</h2>
+  <div class="important">
+    <strong>What happened:</strong> When World War 2 started (Sep 1939), the British declared India at war without consulting Indian leaders. Congress ministries <strong>resigned in protest</strong> (Oct–Nov 1939).<br><br>
+    <strong>Muslim League's response:</strong> Jinnah declared <strong>22 December 1939</strong> as the "Day of Deliverance" — celebrating the end of Congress oppression. Muslims across India observed it with meetings and prayers.<br><br>
+    <strong>Why it matters:</strong> It showed the gap between Hindu and Muslim political experience was now unbridgeable. What Congress saw as a principled stand, Muslims saw as the end of their suffering.
+  </div>
+
+  <h2 class="sub">Lahore Resolution (23 March 1940)</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Where</div>
+      <h3>Minto Park, Lahore</h3>
+      <p>Muslim League annual session. Massive attendance — this was the moment.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Moved By</div>
+      <h3>A.K. Fazl-ul-Haq</h3>
+      <p>Chief Minister of Bengal. The resolution was moved by a Bengali leader — showing Muslim unity across regions.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">What It Demanded</div>
+      <p><strong>"The areas in which the Muslims are numerically in a majority... should be grouped to constitute independent states."</strong> This was the formal demand for what became Pakistan.</p>
+    </div>
+  </div>
+
+  <div class="chain">
+    <div class="chain-step"><strong>1906:</strong> "Give us safeguards within India"</div>
+    <div class="chain-step"><strong>1916:</strong> "Let us share power with you"</div>
+    <div class="chain-step"><strong>1929:</strong> "Give us autonomy in our provinces"</div>
+    <div class="chain-step"><strong>1940:</strong> "Give us our own country"</div>
+  </div>
+  <div class="keyfact"><strong>Each step happened because the previous one was ignored or reversed.</strong> This is the single most important argument in your exam.</div>
+
+  <details>
+    <summary>Critical Q: Was the Lahore Resolution inevitable, or could Hindu-Muslim unity have worked?</summary>
+    <div class="answer">
+      <strong>Inevitable argument:</strong> Every attempt at unity was reversed. Lucknow 1916 → Nehru Report 1928. Separate electorates won → Congress tried to abolish them. The 1937-39 Congress rule proved that in practice, Hindu majority meant Muslim suppression. The demand escalated logically each time cooperation failed.<br><br>
+      <strong>Unity could have worked argument:</strong> Lucknow Pact showed cooperation was possible. If Congress had honoured its promises (kept separate electorates, given 1/3 seats), there would have been no Nehru Report crisis. If Congress ministries had been inclusive during 1937-39, Muslims might not have felt threatened.<br><br>
+      <strong>Best answer:</strong> Unity required both sides to compromise equally. Congress made promises at Lucknow but reversed them at Nehru. Congress had the opportunity during 1937-39 to prove that Muslim rights would be safe — instead, Bande Matram, Wardha Scheme, and Hindi imposition proved the opposite. The Lahore Resolution wasn't sudden; it was the last step of a logical chain of broken promises.
+    </div>
+  </details>
+</div>
+
+<!-- ==================== KEY TERMS ==================== -->
+<div class="section" id="terms">
+  <h1>Key Terms Glossary</h1>
+  <p class="section-intro">Every technical term your exam might use, explained simply with an example. If you don't know the word, you can't answer the question.</p>
+
+  <div class="term-box">
+    <div class="term-word">Separate Electorate</div>
+    <div class="term-def">A voting system where each community (Muslim, Hindu, Sikh, etc.) votes <strong>only for its own candidates</strong> on reserved seats. Only Muslim voters can elect Muslim representatives.</div>
+    <div class="term-eg">Example: A constituency has 1,000 voters — 300 Muslim, 700 Hindu. In a joint electorate, the 700 always pick the winner. In a separate electorate, Muslims get their own seat and choose their own representative from the 300.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Joint Electorate</div>
+    <div class="term-def">All communities vote together for the same seats. The Nehru Report wanted this — which meant Muslims (25% population) could never win against the 75% Hindu majority.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Weightage</div>
+    <div class="term-def">Giving a minority <strong>more seats than its population percentage</strong> to ensure fair representation.</div>
+    <div class="term-eg">Example: Muslims are 25% of the population but get 33% (1/3) of seats. The extra 8% is "weightage." Jinnah demanded 1/3; Nehru offered only 1/4.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Federal vs Unitary</div>
+    <div class="term-def"><strong>Federal:</strong> Power is shared between the centre and provinces. Each province controls its own affairs (education, police, local taxes). <strong>Unitary:</strong> One central government makes all decisions.</div>
+    <div class="term-eg">Think of it like microservices (federal) vs a monolith (unitary). Muslims wanted federal because they were the majority in some provinces. In a unitary system, the Hindu-majority centre would override everything.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Provincial Autonomy</div>
+    <div class="term-def">Provinces run their own affairs without the centre dictating to them. Jinnah's <strong>Point 2</strong>.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Residuary Powers</div>
+    <div class="term-def">Any power not specifically listed in the constitution belongs to someone. In Jinnah's 14 Points, <strong>residuary powers go to the provinces</strong>, not the centre. This keeps the centre weak and provinces strong — safer for Muslim-majority provinces.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Diarchy</div>
+    <div class="term-def">"Rule by two." Some government subjects are run by elected Indian ministers, others by the British Governor. The GOI Act 1935 abolished diarchy in provinces but <strong>kept it at the centre</strong>.</div>
+    <div class="term-eg">Example: Education might be handled by elected ministers, but defence and foreign affairs are handled by the Governor — Indians have no say in those.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Doctrine of Lapse</div>
+    <div class="term-def">Lord Dalhousie's policy: if an Indian ruler died without a <strong>natural male heir</strong>, the EIC <strong>annexed</strong> (took over) his state. Adopted heirs didn't count. This was a major cause of the 1857 War.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Swadeshi Movement</div>
+    <div class="term-def">"Of one's own country." Boycotting British goods and using only Indian-made products. Started as Hindu protest against the Partition of Bengal (1905).</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Deputation / Memorial</div>
+    <div class="term-def">A <strong>deputation</strong> is a group of representatives who meet an authority in person. A <strong>memorial</strong> is a written petition. The Simla Deputation (1906) used both — the 35 leaders met the Viceroy AND submitted a written document.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Two-Nation Theory</div>
+    <div class="term-def">The idea that Hindus and Muslims are <strong>two separate nations</strong> with different religions, cultures, histories, and social systems — they cannot live as one nation. Seeded by Sir Syed, formalised by Iqbal, and turned into reality by the Lahore Resolution.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Bicameral Legislature</div>
+    <div class="term-def">A parliament with <strong>two houses</strong> (like Senate + National Assembly in Pakistan today, or House of Lords + House of Commons in the UK). The GOI Act 1935 introduced this at the centre.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Wardha Scheme</div>
+    <div class="term-def">Gandhi's education plan (1937). Focused on handicrafts (spinning wheel), Hindi language, and Hindu culture. Ignored Islamic education. Made compulsory in Congress-ruled provinces — Muslims saw it as cultural erasure.</div>
+  </div>
+
+  <div class="term-box">
+    <div class="term-word">Civil Disobedience</div>
+    <div class="term-def">Deliberately breaking laws peacefully to protest. Gandhi's strategy against the British: don't pay taxes, don't follow unjust laws, accept arrest. Started 1930 (Salt March).</div>
+  </div>
+</div>
+
+<!-- ==================== EXAM PREP ==================== -->
+<div class="section" id="exam">
+  <h1>Exam Preparation</h1>
+  <p class="section-intro">Your teacher tests critically, not just recall. Here's how to structure answers and the most likely questions.</p>
+
+  <h2>Answer Structure for Any Question</h2>
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Step 1</div>
+      <h3>State your position</h3>
+      <p>Open with a clear thesis: "The Lahore Resolution was the inevitable result of broken promises by Congress." Don't start with background.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Step 2</div>
+      <h3>Give evidence with dates</h3>
+      <p>Every claim needs a fact. "Congress reversed the Lucknow Pact (1916) through the Nehru Report (1928), scrapping separate electorates and reducing Muslim seats from 1/3 to 1/4."</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Step 3</div>
+      <h3>Show the other side</h3>
+      <p>"However, Congress argued that joint electorates promoted national unity." Then explain why it didn't work in practice.</p>
+    </div>
+    <div class="card">
+      <div class="card-label">Step 4</div>
+      <h3>Connect to the bigger chain</h3>
+      <p>Link your answer to one of the 5 cause-effect chains. "This fits into the pattern of escalating demands: 1906 safeguards → 1916 shared power → 1929 autonomy → 1940 separate state."</p>
+    </div>
+  </div>
+
+  <h2 class="sub">Most Likely Exam Questions</h2>
+
+  <details>
+    <summary>1. Why did the War of Independence (1857) fail?</summary>
+    <div class="answer">
+      <strong>Structure:</strong> "The 1857 War failed due to a combination of internal weaknesses and British strengths."<br><br>
+      <strong>Internal:</strong> No central leadership — each city fought independently. No common political goal (some wanted Mughal rule, others wanted local rule). Limited to North India (South, Punjab stayed out). Indian princes and Sikhs fought FOR the British.<br><br>
+      <strong>External:</strong> British had modern weapons, telegraph, railways for troop movement. Reinforcements from Punjab and Britain. Better military training and discipline.<br><br>
+      <strong>Impact:</strong> Queen's Proclamation ended Company rule. Muslims specifically punished → led to the Aligarh Movement.
+    </div>
+  </details>
+
+  <details>
+    <summary>2. What were Sir Syed's contributions to Muslim revival?</summary>
+    <div class="answer">
+      <strong>Educational:</strong> MAO College (1875), Scientific Society (1863), Educational Conference (1886). Translated English books into Urdu. Proved Western education doesn't conflict with Islam.<br><br>
+      <strong>Political:</strong> Wrote "Asbab-e-Baghawat" (1858) to convince British that Muslims weren't the enemy. Mohammadan Association (1883). Warned Muslims to stay away from Congress. Planted the seed of Two-Nation Theory.<br><br>
+      <strong>Social:</strong> "Tahzib-ul-Ikhlaq" journal (1870) urged social reform. Fought against outdated customs. Promoted rational thinking while preserving Islamic faith.<br><br>
+      <strong>Critical angle:</strong> Was he too pro-British? He prioritised education over political rights — but given the circumstances (Muslims were crushed after 1857, had no education, no resources), this was the pragmatic choice. The League was founded 8 years after his death, showing his educational groundwork enabled political action.
+    </div>
+  </details>
+
+  <details>
+    <summary>3. Compare the Lucknow Pact (1916) with the Nehru Report (1928).</summary>
+    <div class="answer">
+      <strong>Lucknow Pact (1916):</strong> Congress-League agreement. Accepted separate electorates, 1/3 Muslim seats, preserved Muslim majorities in Punjab/Bengal. Jinnah brokered it — "Ambassador of Hindu-Muslim Unity."<br><br>
+      <strong>Nehru Report (1928):</strong> Proposed joint electorates (no separate voting), only 1/4 Muslim seats, unitary government (no provincial autonomy).<br><br>
+      <strong>Critical comparison:</strong> The Nehru Report reversed every promise Congress made at Lucknow. In just 12 years, Congress went from accepting Muslim demands to rejecting them entirely. This proved to Jinnah that Hindu-Muslim agreements were unreliable — leading directly to his 14 Points (1929).<br><br>
+      <strong>Bigger picture:</strong> Lucknow = cooperation possible. Nehru Report = cooperation is a trap. This is Chain C — the separate electorate story.
+    </div>
+  </details>
+
+  <details>
+    <summary>4. Why did Muslims demand a separate homeland? (The big question)</summary>
+    <div class="answer">
+      This is probably the most important question. Cover it chronologically:<br><br>
+      <strong>Phase 1 — Historical:</strong> Hindus and Muslims are two nations (Sir Syed's Two-Nation Theory). Different religions, customs, heroes, legal systems. 1,000+ years of separate identity.<br><br>
+      <strong>Phase 2 — Political betrayal:</strong> Congress promised cooperation at Lucknow (1916) but reversed it in the Nehru Report (1928). Separate electorates accepted → then scrapped. 1/3 seats → reduced to 1/4.<br><br>
+      <strong>Phase 3 — Lived experience (strongest evidence):</strong> Congress rule 1937-39 showed what "united India" actually meant: Bande Matram forced on Muslims, Hindi replacing Urdu, Wardha Scheme, Congress flag on government buildings, cow slaughter bans. Pirpur and Shareef Reports documented systematic discrimination.<br><br>
+      <strong>Phase 4 — Intellectual foundation:</strong> Allama Iqbal's Allahabad Address (1930) gave the idea its philosophical basis. Jinnah's 14 Points (1929) gave it constitutional shape.<br><br>
+      <strong>Phase 5 — Formal demand:</strong> Lahore Resolution (23 Mar 1940) — after every alternative had failed.<br><br>
+      <strong>Conclude with the demand ladder:</strong> 1906 safeguards → 1916 shared power → 1929 autonomy → 1940 separate state. Each step happened because the previous one was ignored.
+    </div>
+  </details>
+
+  <details>
+    <summary>5. Evaluate the Government of India Act 1935.</summary>
+    <div class="answer">
+      <strong>Positive:</strong> Gave provincial autonomy. Created 11 provinces. Abolished diarchy in provinces. Separate electorates continued. Sindh separated from Bombay (Jinnah's Point 9). NWFP given full status (Point 10). Bicameral legislature. Basis for the 1937 elections — which proved Congress's true nature.<br><br>
+      <strong>Negative:</strong> Diarchy kept at the centre. Governor-General had veto power. Federal part was never implemented. Provinces didn't have full control — the Governor could override elected ministers.<br><br>
+      <strong>For Muslims specifically:</strong> Mixed result. The Act gave them some of what Jinnah demanded, but the centre remained undemocratic. More importantly, the elections held under this Act (1937) led to Congress rule, which exposed the real problem — even with separate electorates, Muslims were powerless in a Hindu-majority democracy.
+    </div>
+  </details>
+
+  <details>
+    <summary>6. What was the significance of the Simla Deputation (1906)?</summary>
+    <div class="answer">
+      <strong>Facts:</strong> 35 Muslim leaders led by Aga Khan III met Lord Minto on 1 Oct 1906. Submitted a memorial demanding separate electorates, weightage, and a Muslim university.<br><br>
+      <strong>Significance:</strong> First formal Muslim political demand in history. Lord Minto agreed, leading to Minto-Morley Reforms (1909) which accepted separate electorates. This gave Muslims a constitutional mechanism to protect their interests. Without Simla, there would be no separate electorates, no League, no Pakistan movement.<br><br>
+      <strong>Counter-argument:</strong> Congress called it a British conspiracy to "divide Indians." Some historians say the British encouraged it to weaken the nationalist movement.<br><br>
+      <strong>Best answer:</strong> Whether the British encouraged it or not, the Muslim need for separate representation was genuine. Congress had only 2 Muslim delegates out of 70 in 1885. By 1905, the Bengal Partition showed Congress would oppose anything that benefited Muslims. The Simla Deputation was Muslims acting for themselves.
+    </div>
+  </details>
+
+  <hr>
+
+  <h2>Final Revision Checklist</h2>
+  <p>Go through this the day before the exam. If you can say each one from memory, you're ready.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-label">Dates (10 must-know)</div>
+      <p>
+        712 — Bin Qasim<br>
+        1526 — Panipat / Mughals<br>
+        1857 — War of Independence<br>
+        1875 — MAO College<br>
+        1885 — Congress<br>
+        1906 — Simla (1 Oct) + League (30 Dec)<br>
+        1916 — Lucknow Pact<br>
+        1928 — Nehru Report<br>
+        1929 — 14 Points (28 Mar)<br>
+        1940 — Lahore Resolution (23 Mar)
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-label">People (10 must-know)</div>
+      <p>
+        Muhammad bin Qasim — Sindh 712<br>
+        Babur — First Mughal<br>
+        Aurangzeb — Last great Mughal<br>
+        Sir Syed Ahmad Khan — Aligarh<br>
+        A.O. Hume — Congress founder<br>
+        Aga Khan III — Simla Deputation<br>
+        Jinnah — 14 Points, League leader<br>
+        Allama Iqbal — Allahabad Address<br>
+        Motilal Nehru — Nehru Report<br>
+        Fazl-ul-Haq — Moved Lahore Resolution
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-label">Numbers</div>
+      <p>
+        1/3 vs 1/4 — Lucknow vs Nehru Report<br>
+        707 vs 107 — Congress vs League in 1937<br>
+        1,585 — Total seats in 1937<br>
+        8 — Provinces Congress ruled<br>
+        11 — Provinces in GOI Act 1935<br>
+        85 — Troopers at Meerut<br>
+        70 delegates, 2 Muslim — Congress 1885<br>
+        35 — Simla Deputation leaders<br>
+        78.5 million — Bengal's population<br>
+        5 — Delhi Sultanate dynasties
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-label">The 5 Chains</div>
+      <p>
+        A: Why Muslims fell behind<br>
+        B: Why they needed their own party<br>
+        C: The separate electorate story<br>
+        D: Why League lost 1937 but won 1946<br>
+        E: The demand ladder (safeguards → country)
+      </p>
+    </div>
+  </div>
+
+  <div class="important">
+    <strong>The golden rule for your teacher's style:</strong> Never just state facts. Always say <em>why</em> something happened and <em>what it caused next</em>. Connect every event to the chain it belongs to. Facts get you passing marks; analysis gets you top marks.
+  </div>
+</div>
+
+</div><!-- /wrapper -->
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const sections = document.querySelectorAll('.section');
+
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const target = tab.dataset.target;
+    tabs.forEach(t => t.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById(target).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
